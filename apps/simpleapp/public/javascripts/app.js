@@ -102,8 +102,9 @@ function onViewer(viewer) {
         //     console.log('viewer error', error);
         // });
         var formData = new FormData(document.forms[0]);
-        formData.append("file", headerImage.split(",").pop(), "upload.png");
+        formData.append("file", headerImage.split(",").pop());
         formData.append("type", "image/png");
+        formData.append("Content-Transfer-Encoding", "base64");
         osapi.jive.core.post({
             v: "v3",
             href: "/profileImages/temporary",
