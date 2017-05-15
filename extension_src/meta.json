@@ -4,13 +4,11 @@
     "type": "client-app",
     "name": "app",
     "description": "Description for app",
-    "minimum_version": "0070300000",
+    "minimum_version": "0080300000",
     "icon_16": "extension-16.png",
     "icon_48": "extension-48.png",
     "icon_128": "extension-128.png",
     "redirect_url": "%serviceURL%",
-    "register_url": "%serviceURL%/register",
-    "unregister_url": "%serviceURL%/unregister",
     "released_on": "2017-05-15T03:44:30.169Z",
     "service_url": "http://localhost"
 }

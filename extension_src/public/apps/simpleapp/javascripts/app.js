@@ -94,15 +94,25 @@ function onViewer(viewer) {
         croppedCanvas = cropper.getCroppedCanvas();
         headerImage = croppedCanvas.toDataURL();
         $('.picture').attr("src", headerImage);
-        container.hide();
-        croppable = true;
-        osapi.jive.core.post({
+        // osapi.jive.corev3.people.getViewer().execute(function (viewer) {
+        //     var id = viewer.id;
+        //     console.log('viewer', viewer);
+        //
+        // }, function (error) {
+        //     console.log('viewer error', error);
+        // });
+        osapi.jive.core.put({
             v: "v3",
-            href: "/profileImages/temporary/" + headerImage
+            href: "/people/" + '@viewer' + "/avatar?uri=" + headerImage
         }).execute(function (response) {
+            var id = response.id;
             console.log('response', response);
+            container.hide();
+            croppable = true;
         },function(error){
             console.log('error', error);
+            container.hide();
+            croppable = true;
         });
     })
 } // end function
