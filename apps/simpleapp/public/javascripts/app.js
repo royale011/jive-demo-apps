@@ -51,6 +51,50 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
+    console.log("onData", data);
+    $('.image-cropper').src = url;
+    $('.picture').src = headerImage;
+    $('.container').hide();
+    cropper = new Cropper($('.image-cropper'), {
+        aspectRatio: 1,
+        background: false,
+        zoomable: false,
+        ready: function () {
+            croppable = true;
+        }
+    });
+    $('#change-button').click(function (e) {
+        picValue = e.target.files[0];
+        if (!picValue.type.includes('image/')) {
+            alert('Please select an image file');
+            return;
+        }
+        if (typeof FileReader === 'function') {
+            var reader = new FileReader();
+            reader.onload = (event) => {
+                url = event.target.result;
+                // rebuild cropperjs with the updated source
+                cropper.replace(url);
+            };
+            $('.image-cropper').src = url;
+            reader.readAsDataURL(picValue);
+            $('.container').show();
+        } else {
+            alert('Sorry, FileReader API not supported');
+        }
+    });
+    $('.ok-button').click(function () {
+        $('.container').hide();
+        var croppedCanvas;
+        if (!croppable) {
+            return;
+        }
+        croppedCanvas = cropper.getCroppedCanvas();
+        headerImage = croppedCanvas.toDataURL();
+        $('.picture').src = headerImage;
+        $('.container').hide();
+        croppable = true;
+    })
 } // end function
 
 /************************************************************************
@@ -74,50 +118,6 @@ function onAction(context) {
  NOTE: If not needed, you can remove the entire function
  ************************************************************************/
 function onData(data) {
-    console.log("onData", data);
-    $('#image').src = url;
-    $('.picture').src = headerImage;
-    $('.container').hide();
-    cropper = new Cropper($('#image'), {
-        aspectRatio: 1,
-        background: false,
-        zoomable: false,
-        ready: function () {
-            croppable = true;
-        }
-    });
-    $('#change').click(function (e) {
-        picValue = e.target.files[0];
-        if (!picValue.type.includes('image/')) {
-            alert('Please select an image file');
-            return;
-        }
-        if (typeof FileReader === 'function') {
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                url = event.target.result;
-                // rebuild cropperjs with the updated source
-                cropper.replace(url);
-            };
-            $('#image').src = url;
-            reader.readAsDataURL(picValue);
-            $('.container').show();
-        } else {
-            alert('Sorry, FileReader API not supported');
-        }
-    });
-    $('#button').click(function () {
-        $('.container').hide();
-        var croppedCanvas;
-        if (!croppable) {
-            return;
-        }
-        croppedCanvas = cropper.getCroppedCanvas();
-        headerImage = croppedCanvas.toDataURL();
-        $('.picture').src = headerImage;
-        $('.container').hide();
-        croppable = true;
-    })
 } // end function
 
 
