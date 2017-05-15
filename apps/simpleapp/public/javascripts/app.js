@@ -108,6 +108,10 @@ function onViewer(viewer) {
         osapi.jive.core.post({
             v: "v3",
             href: "/profileImages/temporary",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
             body: multipartFormData(headerImage)
         }).execute(function (response) {
             console.log('response', response);
