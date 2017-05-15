@@ -103,7 +103,7 @@ function onViewer(viewer) {
         // });
         var imageBlob = dataURItoBlob(headerImage);
         console.log('blob', imageBlob);
-        var formData = new FormData();
+        var formData = new FormData(document.forms[0]);
         formData.append("file", imageBlob);
         console.log('form data', formData);
         osapi.jive.core.put({
