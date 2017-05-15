@@ -67,7 +67,17 @@ function onView(context) {
  ************************************************************************/
 function onAction(context) {
     console.log("onAction", context);
+} // end function
 
+/************************************************************************
+ STEP 6 - Use this method if you only want to perform something once the Data Context has been resolved
+ NOTE: If not needed, you can remove the entire function
+ ************************************************************************/
+function onData(data) {
+    console.log("onData", data);
+    $('#image').src = url;
+    $('.picture').src = headerImage;
+    $('.container').hide();
     cropper = new Cropper($('#image'), {
         aspectRatio: 1,
         background: false,
@@ -76,9 +86,6 @@ function onAction(context) {
             croppable = true;
         }
     });
-    $('#image').src = url;
-    $('.picture').src = headerImage;
-    $('.container').hide();
     $('#change').click(function (e) {
         picValue = e.target.files[0];
         if (!picValue.type.includes('image/')) {
@@ -103,21 +110,14 @@ function onAction(context) {
         $('.container').hide();
         var croppedCanvas;
         if (!croppable) {
-            return
+            return;
         }
         croppedCanvas = cropper.getCroppedCanvas();
         headerImage = croppedCanvas.toDataURL();
         $('.picture').src = headerImage;
-        croppable = true
+        $('.container').hide();
+        croppable = true;
     })
-} // end function
-
-/************************************************************************
- STEP 6 - Use this method if you only want to perform something once the Data Context has been resolved
- NOTE: If not needed, you can remove the entire function
- ************************************************************************/
-function onData(data) {
-    console.log("onData", data);
 } // end function
 
 
