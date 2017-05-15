@@ -230,7 +230,7 @@ endpoint is in the format expected by the jivelinks API.
      [clientUrl]/[tile name]/configure. Please make sure this endpoint
      is available either through manual configuration, or route autowiring (see above).
 (2) If "registration" attribute is not specified, the value will be interpreted as
-     http[your service url]/registration (this is the shared, framework provided registration endpoint).
+     http[your service imageUrl]/registration (this is the shared, framework provided registration endpoint).
 (3) Any paths containing {{{host}}} will have that value substituted with the value of clientUrl from your
     configuration file.
 

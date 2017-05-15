@@ -28,7 +28,7 @@ var headerImage = '',
     picValue = '',
     cropper = null,
     croppable = false,
-    url = '';
+    imageUrl = '';
 
 /************************************************************************
  STEP 2 - Use this method if you want to run code after OpenSocial has loaded the environemnt
@@ -51,10 +51,11 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
-    $('.image-cropper').src = url;
+    var image = $('#image-cropper');
+    image.src = imageUrl;
     $('.picture').src = headerImage;
     $('.container').hide();
-    cropper = new Cropper($('.image-cropper'), {
+    cropper = new Cropper(image, {
         aspectRatio: 1,
         background: false,
         zoomable: false,
@@ -63,6 +64,7 @@ function onViewer(viewer) {
         }
     });
     $('#change-button').click(function (e) {
+        console.log("uploadImage", viewer);
         picValue = e.target.files[0];
         if (!picValue.type.includes('image/')) {
             alert('Please select an image file');
@@ -71,11 +73,11 @@ function onViewer(viewer) {
         if (typeof FileReader === 'function') {
             var reader = new FileReader();
             reader.onload = (event) => {
-                url = event.target.result;
+                imageUrl = event.target.result;
                 // rebuild cropperjs with the updated source
-                cropper.replace(url);
+                cropper.replace(imageUrl);
             };
-            $('.image-cropper').src = url;
+            $('#image-cropper').src = imageUrl;
             reader.readAsDataURL(picValue);
             $('.container').show();
         } else {
@@ -83,7 +85,9 @@ function onViewer(viewer) {
         }
     });
     $('.ok-button').click(function () {
-        $('.container').hide();
+        console.log("cropImage", viewer);
+        var container = $('.container');
+        container.hide();
         var croppedCanvas;
         if (!croppable) {
             return;
@@ -91,7 +95,7 @@ function onViewer(viewer) {
         croppedCanvas = cropper.getCroppedCanvas();
         headerImage = croppedCanvas.toDataURL();
         $('.picture').src = headerImage;
-        $('.container').hide();
+        container.hide();
         croppable = true;
     })
 } // end function
