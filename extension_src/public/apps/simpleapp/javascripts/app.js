@@ -104,6 +104,7 @@ function onViewer(viewer) {
         var imageBlob = dataURItoBlob(headerImage);
         var formData = new FormData();
         formData.append("file", imageBlob);
+        console.log('form data', formData);
         osapi.jive.core.put({
             v: "v3",
             // userId: "@viewer",
