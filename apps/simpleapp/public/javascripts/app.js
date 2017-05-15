@@ -42,7 +42,7 @@ function onReady(env) {
 
     //TODO: ADD IN UI INIT STUFF
 
-    app.resize();
+    // app.resize();
 } // end function
 
 /************************************************************************
