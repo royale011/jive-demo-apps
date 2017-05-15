@@ -102,6 +102,7 @@ function onViewer(viewer) {
         //     console.log('viewer error', error);
         // });
         var imageBlob = dataURItoBlob(headerImage);
+        console.log('blob', imageBlob);
         var formData = new FormData();
         formData.append("file", imageBlob);
         console.log('form data', formData);
