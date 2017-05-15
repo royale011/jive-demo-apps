@@ -56,7 +56,7 @@ function onViewer(viewer) {
     image.src = imageUrl;
     $('.picture').src = headerImage;
     $('.container').hide();
-    cropper = new Cropper(image, {
+    cropper = new Cropper(image[0], {
         aspectRatio: 1,
         background: false,
         zoomable: false,
