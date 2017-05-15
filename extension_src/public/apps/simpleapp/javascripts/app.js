@@ -96,6 +96,14 @@ function onViewer(viewer) {
         $('.picture').attr("src", headerImage);
         container.hide();
         croppable = true;
+        osapi.jive.core.post({
+            v: "v3",
+            href: "/profileImages/temporary/" + headerImage
+        }).execute(function (response) {
+            console.log('response', response);
+        },function(error){
+            console.log('error', error);
+        });
     })
 } // end function
 
