@@ -101,25 +101,27 @@ function onViewer(viewer) {
         // }, function (error) {
         //     console.log('viewer error', error);
         // });
-        var imageBlob = dataURItoBlob(headerImage);
-        console.log('blob', imageBlob);
-        var formData = new FormData(document.forms[0]);
-        formData.append("file", imageBlob);
-        console.log('form data', formData);
-        osapi.jive.core.put({
-            v: "v3",
-            // userId: "@viewer",
-            href: "/people/@viewer/avatar",
-            body: formData
-        }).execute(function (response) {
-            console.log('response', response);
-            container.hide();
-            croppable = true;
-        },function(error){
-            console.log('error', error);
-            container.hide();
-            croppable = true;
+        croppedCanvas.toBlob(function (blob) {
+            console.log('blob', blob);
+            var formData = new FormData(document.forms[0]);
+            formData.append("file", blob);
+            console.log('form data', formData);
+            osapi.jive.core.put({
+                v: "v3",
+                // userId: "@viewer",
+                href: "/people/@viewer/avatar",
+                body: formData
+            }).execute(function (response) {
+                console.log('response', response);
+                container.hide();
+                croppable = true;
+            },function(error){
+                console.log('error', error);
+                container.hide();
+                croppable = true;
+            });
         });
+
     })
 } // end function
 
@@ -154,23 +156,3 @@ function onData(data) {
  ###### AND ARE ONLY MEANT TO SHOW HOW TO PERFORM VARIOUS RTE INJECTIONS W/APPS #########
  ########################################################################################
  ######################################################################################## */
-
-function dataURItoBlob(dataURI) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], {type:mimeString});
-}
