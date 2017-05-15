@@ -65,7 +65,7 @@ function onViewer(viewer) {
         }
     });
     $('#change-button').click(function (e) {
-        console.log("uploadImage", viewer);
+        console.log("uploadImage", e.target);
         picValue = e.target.files[0];
         if (!picValue.type.includes('image/')) {
             alert('Please select an image file');
@@ -86,7 +86,7 @@ function onViewer(viewer) {
         }
     });
     $('.ok-button').click(function () {
-        console.log("cropImage", viewer);
+        console.log("cropImage");
         var container = $('.container');
         container.hide();
         var croppedCanvas;
