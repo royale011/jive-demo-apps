@@ -106,7 +106,7 @@ function onViewer(viewer) {
             formData.append("file", blob);
             osapi.jive.core.post({
                 v: "v3",
-                href: "profileImages/temporary",
+                href: "/profileImages/temporary",
                 body: formData
             }).execute(function (response) {
                 console.log('response', response);
