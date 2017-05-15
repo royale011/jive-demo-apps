@@ -102,9 +102,8 @@ function onViewer(viewer) {
         //     console.log('viewer error', error);
         // });
         var formData = new FormData(document.forms[0]);
-        formData.append("file", headerImage.split(",").pop());
-        formData.append("type", "image/png");
-        formData.append("Content-Type", "image/png");
+        formData.append("file", ('upload.png', headerImage.split(",").pop(), 'image/png'));
+        formData.append("Content-Type", "text/xml");
         formData.append("Content-Transfer-Encoding", "base64");
         osapi.jive.core.post({
             v: "v3",
