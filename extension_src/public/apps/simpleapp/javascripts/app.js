@@ -52,7 +52,7 @@ function onReady(env) {
 function onViewer(viewer) {
     console.log("onViewer", viewer);
     var image = $('#image-cropper');
-    console.log(image.tagName);
+    console.log("image Object", image);
     image.src = imageUrl;
     $('.picture').src = headerImage;
     $('.container').hide();
