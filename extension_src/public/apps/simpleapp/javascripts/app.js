@@ -102,23 +102,28 @@ function onViewer(viewer) {
         //     console.log('viewer error', error);
         // });
         croppedCanvas.toBlob(function (blob) {
-            var myReader = new FileReader();
-            myReader.onload = function(event){
-                console.log(JSON.stringify(myReader.result));
-            };
-            myReader.readAsText(blob);
             var formData = new FormData(document.forms[0]);
             formData.append("file", blob);
-            for (var key of formData.entries()) {
-                console.log(key[0] + ', ' + key[1]);
-            }
-            osapi.jive.core.put({
+            osapi.jive.core.post({
                 v: "v3",
-                // userId: "@viewer",
-                href: "/people/@viewer/avatar",
+                href: "/images",
                 body: formData
             }).execute(function (response) {
                 console.log('response', response);
+                // osapi.jive.core.put({
+                //     v: "v3",
+                //     // userId: "@viewer",
+                //     href: "/people/@viewer/avatar",
+                //     body: formData
+                // }).execute(function (response) {
+                //     console.log('response', response);
+                //     container.hide();
+                //     croppable = true;
+                // },function(error){
+                //     console.log('error', error);
+                //     container.hide();
+                //     croppable = true;
+                // });
                 container.hide();
                 croppable = true;
             },function(error){
