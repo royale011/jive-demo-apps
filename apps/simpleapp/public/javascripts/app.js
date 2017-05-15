@@ -51,7 +51,7 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
-    cropper = new gadgets.window.Cropper($('#image'), {
+    cropper = new Cropper($('#image'), {
         aspectRatio: 1,
         background: false,
         zoomable: false,
