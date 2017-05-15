@@ -53,8 +53,6 @@ function onViewer(viewer) {
     console.log("onViewer", viewer);
     var image = $('#image-cropper');
     console.log("image Object", image);
-    image.src = imageUrl;
-    $('.picture').src = headerImage;
     $('.container').hide();
     cropper = new Cropper(image[0], {
         aspectRatio: 1,
@@ -78,7 +76,7 @@ function onViewer(viewer) {
                 // rebuild cropperjs with the updated source
                 cropper.replace(imageUrl);
             };
-            $('#image-cropper').src = imageUrl;
+            $('#image-cropper').attr("src", imageUrl);
             reader.readAsDataURL(picValue);
             $('.container').show();
         } else {
@@ -95,7 +93,7 @@ function onViewer(viewer) {
         }
         croppedCanvas = cropper.getCroppedCanvas();
         headerImage = croppedCanvas.toDataURL();
-        $('.picture').src = headerImage;
+        $('.picture').attr("src", headerImage);
         container.hide();
         croppable = true;
     })
