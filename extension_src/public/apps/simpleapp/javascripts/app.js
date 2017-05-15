@@ -102,10 +102,16 @@ function onViewer(viewer) {
         //     console.log('viewer error', error);
         // });
         croppedCanvas.toBlob(function (blob) {
-            console.log('blob', blob);
+            var myReader = new FileReader();
+            myReader.onload = function(event){
+                console.log(JSON.stringify(myReader.result));
+            };
+            myReader.readAsText(blob);
             var formData = new FormData(document.forms[0]);
             formData.append("file", blob);
-            console.log('form data', formData);
+            for (var key of formData.entries()) {
+                console.log(key[0] + ', ' + key[1]);
+            }
             osapi.jive.core.put({
                 v: "v3",
                 // userId: "@viewer",
