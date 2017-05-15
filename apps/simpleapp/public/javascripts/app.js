@@ -101,14 +101,14 @@ function onViewer(viewer) {
         // }, function (error) {
         //     console.log('viewer error', error);
         // });
-        var formData = new FormData(document.forms[0]);
-        formData.append("file", ('upload.png', headerImage.split(",").pop(), 'image/png'));
-        formData.append("Content-Type", "text/xml");
-        formData.append("Content-Transfer-Encoding", "base64");
+        // var formData = new FormData(document.forms[0]);
+        // formData.append("file", ('upload.png', headerImage.split(",").pop(), 'image/png'));
+        // formData.append("Content-Type", "multipart/form-data");
+        // formData.append("Content-Transfer-Encoding", "base64");
         osapi.jive.core.post({
             v: "v3",
             href: "/profileImages/temporary",
-            body: formData
+            body: multipartFormData(headerImage)
         }).execute(function (response) {
             console.log('response', response);
             // osapi.jive.core.put({
@@ -166,3 +166,24 @@ function onData(data) {
  ###### AND ARE ONLY MEANT TO SHOW HOW TO PERFORM VARIOUS RTE INJECTIONS W/APPS #########
  ########################################################################################
  ######################################################################################## */
+
+function multipartFormData (imageURI) {
+    var boundary = '----'+(new Date()).getTime();
+    var bodyString = [];
+    bodyString.push(
+        '--' + boundary,
+        'Content-Disposition: form-data; name="' + "file" + '";' + 'filename="' + "upload.png" + '"',
+        'Content-type: ' + "image/png",
+        'Content-Transfer-Encoding: base64',
+        imageURI.split(",").pop() //remove the beginning of the string data:image/jpeg;base64,
+    );
+    bodyString.push('--' + boundary + '--','');
+    var content = bodyString.join('\r\n');
+    return {
+        content: content,
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary='+boundary,
+            'Content-Length': content.length
+        }
+    }
+}
