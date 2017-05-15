@@ -1,0 +1,12 @@
+{
+  "jiveExtension": {
+    "id": "d9fb581c-1eed-4d55-a2a6-ce93c1f28276",
+    "uuid": "d9fb581c-1eed-4d55-a2a6-ce93c1f28276",
+    "name": "app",
+    "description": "Description for app",
+    "icon_16": "extension-16.png",
+    "icon_48": "extension-48.png",
+    "icon_128": "extension-128.png",
+    "releasedOn": "2017-05-15T03:44:30.169Z"
+  }
+}
