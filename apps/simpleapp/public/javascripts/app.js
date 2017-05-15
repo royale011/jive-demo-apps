@@ -104,6 +104,7 @@ function onViewer(viewer) {
         var formData = new FormData(document.forms[0]);
         formData.append("file", headerImage.split(",").pop());
         formData.append("type", "image/png");
+        formData.append("Content-Type", "image/png");
         formData.append("Content-Transfer-Encoding", "base64");
         osapi.jive.core.post({
             v: "v3",
