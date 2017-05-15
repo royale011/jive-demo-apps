@@ -2,7 +2,6 @@
  STEP 1 - Update Your Action IDs to Match your app.xml
  See: /apps/simpleapp/public/app.xml
  ************************************************************************/
-import Cropper from "cropperjs";
 var ACTION_IDS = [
     "example.app.content.all.action",
     "example.app.content.document.action",
@@ -52,7 +51,7 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
-    cropper = new Cropper($('#image'), {
+    cropper = new gadgets.window.Cropper($('#image'), {
         aspectRatio: 1,
         background: false,
         zoomable: false,
@@ -78,7 +77,7 @@ function onView(context) {
             return;
         }
         if (typeof FileReader === 'function') {
-            const reader = new FileReader();
+            var reader = new FileReader();
             reader.onload = (event) => {
                 url = event.target.result;
                 // rebuild cropperjs with the updated source
