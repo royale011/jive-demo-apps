@@ -96,10 +96,11 @@ function onViewer(viewer) {
         $('.picture').attr("src", headerImage);
         container.hide();
         croppable = true;
-        osapi.jive.core.post({
+        osapi.jive.core.put({
             v: "v3",
-            href: "/profileImages/temporary/" + headerImage
+            href: "/people/{personID}/avatar"
         }).execute(function (response) {
+            var id = response.id;
             console.log('response', response);
         },function(error){
             console.log('error', error);

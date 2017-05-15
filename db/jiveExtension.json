@@ -7,6 +7,7 @@
     "icon_16": "extension-16.png",
     "icon_48": "extension-48.png",
     "icon_128": "extension-128.png",
-    "releasedOn": "2017-05-15T03:44:30.169Z"
+    "releasedOn": "2017-05-15T03:44:30.169Z",
+    "redirect_url": "%serviceURL%"
   }
 }
