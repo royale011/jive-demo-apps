@@ -59,6 +59,15 @@ function onViewer(viewer) {
  ************************************************************************/
 function onView(context) {
     console.log("onView", context);
+} // end function
+
+/************************************************************************
+ STEP 5 - Use this method if you only want to perform something once the Action Context has been resolved
+ NOTE: If not needed, you can remove the entire function
+ ************************************************************************/
+function onAction(context) {
+    console.log("onAction", context);
+
     cropper = new Cropper($('#image'), {
         aspectRatio: 1,
         background: false,
@@ -101,14 +110,6 @@ function onView(context) {
         $('.picture').src = headerImage;
         croppable = true
     })
-} // end function
-
-/************************************************************************
- STEP 5 - Use this method if you only want to perform something once the Action Context has been resolved
- NOTE: If not needed, you can remove the entire function
- ************************************************************************/
-function onAction(context) {
-    console.log("onAction", context);
 } // end function
 
 /************************************************************************
