@@ -64,26 +64,18 @@ function onViewer(viewer) {
             croppable = true;
         }
     });
-    $('#change-button').click(function (e) {
-        console.log("uploadImage", e.target);
-        picValue = e.target.files[0];
-        if (!picValue.type.includes('image/')) {
-            alert('Please select an image file');
-            return;
+    $('#change-button').change(function (e) {
+        var files = e.target.files || e.dataTransfer.files;
+        console.log("uploadImage", files);
+        if (!files.length) return;
+        var container = $('.container');
+        container.show();
+        picValue = files[0];
+        imageUrl = getObjectURL(picValue);
+        if (cropper) {
+            cropper.replace(imageUrl);
         }
-        if (typeof FileReader === 'function') {
-            var reader = new FileReader();
-            reader.onload = (event) => {
-                imageUrl = event.target.result;
-                // rebuild cropperjs with the updated source
-                cropper.replace(imageUrl);
-            };
-            $('#image-cropper').src = imageUrl;
-            reader.readAsDataURL(picValue);
-            $('.container').show();
-        } else {
-            alert('Sorry, FileReader API not supported');
-        }
+        container.show();
     });
     $('.ok-button').click(function () {
         console.log("cropImage");
@@ -132,3 +124,15 @@ function onData(data) {
  ###### AND ARE ONLY MEANT TO SHOW HOW TO PERFORM VARIOUS RTE INJECTIONS W/APPS #########
  ########################################################################################
  ######################################################################################## */
+
+function getObjectURL (file) {
+    var url = null;
+    if (!!gadgets.window.createObjectURL) { // basic
+        url = gadgets.window.createObjectURL(file);
+    } else if (!!gadgets.window.URL) { // mozilla(firefox)
+        url = gadgets.window.URL.createObjectURL(file);
+    } else if (!!gadgets.window.webkitURL) { // webkit or chrome
+        url = gadgets.window.webkitURL.createObjectURL(file);
+    }
+    return url;
+}
