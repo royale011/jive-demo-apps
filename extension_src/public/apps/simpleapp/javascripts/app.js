@@ -51,7 +51,6 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
-    console.log("onData", data);
     $('.image-cropper').src = url;
     $('.picture').src = headerImage;
     $('.container').hide();
@@ -118,6 +117,7 @@ function onAction(context) {
  NOTE: If not needed, you can remove the entire function
  ************************************************************************/
 function onData(data) {
+    console.log("onData", data);
 } // end function
 
 
