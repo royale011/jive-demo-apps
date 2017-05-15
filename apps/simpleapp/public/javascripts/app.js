@@ -101,38 +101,36 @@ function onViewer(viewer) {
         // }, function (error) {
         //     console.log('viewer error', error);
         // });
-        croppedCanvas.toBlob(function (blob) {
-            var formData = new FormData(document.forms[0]);
-            formData.append("file", blob, "upload.png");
-            osapi.jive.core.post({
-                v: "v3",
-                href: "/profileImages/temporary",
-                body: formData
-            }).execute(function (response) {
-                console.log('response', response);
-                // osapi.jive.core.put({
-                //     v: "v3",
-                //     // userId: "@viewer",
-                //     href: "/people/@viewer/avatar",
-                //     body: formData
-                // }).execute(function (response) {
-                //     console.log('response', response);
-                //     container.hide();
-                //     croppable = true;
-                // },function(error){
-                //     console.log('error', error);
-                //     container.hide();
-                //     croppable = true;
-                // });
-                container.hide();
-                croppable = true;
-            },function(error){
-                console.log('error', error);
-                container.hide();
-                croppable = true;
-            });
+        var formData = new FormData(document.forms[0]);
+        formData.append("file", headerImage.split(",").pop(), "upload.png");
+        formData.append("type", "image/png");
+        osapi.jive.core.post({
+            v: "v3",
+            href: "/profileImages/temporary",
+            body: formData
+        }).execute(function (response) {
+            console.log('response', response);
+            // osapi.jive.core.put({
+            //     v: "v3",
+            //     // userId: "@viewer",
+            //     href: "/people/@viewer/avatar",
+            //     body: formData
+            // }).execute(function (response) {
+            //     console.log('response', response);
+            //     container.hide();
+            //     croppable = true;
+            // },function(error){
+            //     console.log('error', error);
+            //     container.hide();
+            //     croppable = true;
+            // });
+            container.hide();
+            croppable = true;
+        },function(error){
+            console.log('error', error);
+            container.hide();
+            croppable = true;
         });
-
     })
 } // end function
 
