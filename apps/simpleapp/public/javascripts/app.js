@@ -51,6 +51,14 @@ function onReady(env) {
  ************************************************************************/
 function onViewer(viewer) {
     console.log("onViewer", viewer);
+} // end function
+
+/************************************************************************
+ STEP 4 - Use this method if you only want to perform something once the View Context has been resolved
+ NOTE: If not needed, you can remove the entire function
+ ************************************************************************/
+function onView(context) {
+    console.log("onView", context);
     cropper = new Cropper($('#image'), {
         aspectRatio: 1,
         background: false,
@@ -62,14 +70,6 @@ function onViewer(viewer) {
     $('#image').src = url;
     $('.picture').src = headerImage;
     $('.container').hide();
-} // end function
-
-/************************************************************************
- STEP 4 - Use this method if you only want to perform something once the View Context has been resolved
- NOTE: If not needed, you can remove the entire function
- ************************************************************************/
-function onView(context) {
-    console.log("onView", context);
     $('#change').click(function (e) {
         picValue = e.target.files[0];
         if (!picValue.type.includes('image/')) {
