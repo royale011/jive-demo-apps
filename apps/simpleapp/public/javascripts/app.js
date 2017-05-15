@@ -92,7 +92,7 @@ function onViewer(viewer) {
             return;
         }
         croppedCanvas = cropper.getCroppedCanvas();
-        headerImage = croppedCanvas.toDataURL();
+        headerImage = croppedCanvas.toDataURL('image/jpeg');
         $('.picture').attr("src", headerImage);
         // osapi.jive.corev3.people.getViewer().execute(function (viewer) {
         //     var id = viewer.id;
@@ -167,15 +167,15 @@ function onData(data) {
  ########################################################################################
  ######################################################################################## */
 
-function multipartFormData (imageURI) {
+function multipartFormData (image) {
     var boundary = '----'+(new Date()).getTime();
     var bodyString = [];
     bodyString.push(
         '--' + boundary,
-        'Content-Disposition: form-data; name="' + "file" + '";' + 'filename="' + "upload.png" + '"',
-        'Content-type: ' + "image/png",
-        'Content-Transfer-Encoding: base64',
-        imageURI.split(",").pop() //remove the beginning of the string data:image/jpeg;base64,
+        'Content-Disposition: form-data; name="' + "file" + '";' + 'filename="' + "upload.jpg" + '"',
+        'Content-Type: ' + "image/jpeg",
+        'Content-Transfer-Encoding: base64','', //need /r/n twice here
+        image.split(",").pop() //remove the data:image/png;base64,
     );
     bodyString.push('--' + boundary + '--','');
     var content = bodyString.join('\r\n');
