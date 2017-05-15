@@ -103,7 +103,7 @@ function onViewer(viewer) {
         // });
         croppedCanvas.toBlob(function (blob) {
             var formData = new FormData(document.forms[0]);
-            formData.append("file", blob);
+            formData.append("file", blob, "upload.png");
             osapi.jive.core.post({
                 v: "v3",
                 href: "/profileImages/temporary",
