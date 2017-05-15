@@ -104,10 +104,9 @@ function onViewer(viewer) {
         croppedCanvas.toBlob(function (blob) {
             var formData = new FormData(document.forms[0]);
             formData.append("file", blob);
-            formData.append("type", "image/png");
             osapi.jive.core.post({
                 v: "v3",
-                href: "/images",
+                href: "profileImages/temporary",
                 body: formData
             }).execute(function (response) {
                 console.log('response', response);
