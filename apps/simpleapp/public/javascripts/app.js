@@ -30,6 +30,8 @@ var headerImage = '',
     croppable = false,
     imageUrl = '';
 
+var jiveURL = '';
+
 /************************************************************************
  STEP 2 - Use this method if you want to run code after OpenSocial has loaded the environemnt
  NOTE: This is marginally better than jQuery onReady, but not required.
@@ -38,7 +40,7 @@ var headerImage = '',
  ************************************************************************/
 function onReady(env) {
     console.log('onReady', env);
-    var jiveURL = env["jiveUrl"];
+    jiveURL = env["jiveUrl"];
 
     //TODO: ADD IN UI INIT STUFF
 
@@ -82,14 +84,12 @@ function onViewer(viewer) {
         } else {
             alert('Sorry, FileReader API not supported');
         }
-        var formData = new FormData();
-        formData.append("file", picValue);
         osapi.jive.core.put({
-            v: "v3",
-            href: "/people/@viewer/avatar",
-            uri: "https://thoughtworks-preview.jiveon.com/api/core/v3/images/241878"
+            'v': 'v3',
+            'href': '/people/@me/avatar?uri=http://img04.tooopen.com/images/20131115/sy_47505221718.jpg',
+            'userId': '@viewer'
         }).execute(function (response) {
-            console.log('response', response);
+            console.log('JIVE Api response', response);
         },function(error){
             console.log('error', error);
         });
