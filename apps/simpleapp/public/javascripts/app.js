@@ -87,8 +87,7 @@ function onViewer(viewer) {
         osapi.jive.core.put({
             v: "v3",
             href: "/people/@viewer/avatar",
-            body: formData,
-            type: 'multipart/form-data'
+            uri: "https://thoughtworks-preview.jiveon.com/api/core/v3/images/241878"
         }).execute(function (response) {
             console.log('response', response);
         },function(error){
