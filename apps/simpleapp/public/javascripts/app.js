@@ -82,6 +82,21 @@ function onViewer(viewer) {
         } else {
             alert('Sorry, FileReader API not supported');
         }
+        osapi.jive.core.post(getImageParam({
+            v: "v3",
+            href: "/people/@viewer/avatar",
+            body: {
+                "file": picValue
+            }
+        })).execute(function (response) {
+            console.log('response', response);
+            container.hide();
+            croppable = true;
+        },function(error){
+            console.log('error', error);
+            container.hide();
+            croppable = true;
+        });
     });
     $('.ok-button').click(function () {
         console.log("cropImage");
