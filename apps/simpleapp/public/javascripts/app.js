@@ -105,15 +105,10 @@ function onViewer(viewer) {
         // formData.append("file", ('upload.png', headerImage.split(",").pop(), 'image/png'));
         // formData.append("Content-Type", "multipart/form-data");
         // formData.append("Content-Transfer-Encoding", "base64");
-        osapi.jive.core.post({
+        osapi.jive.core.post($.join({
             v: "v3",
-            href: "/profileImages/temporary",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: multipartFormData(headerImage)
-        }).execute(function (response) {
+            href: "/profileImages/temporary"
+        }, multipartFormData(headerImage))).execute(function (response) {
             console.log('response', response);
             // osapi.jive.core.put({
             //     v: "v3",
@@ -184,7 +179,7 @@ function multipartFormData (image) {
     bodyString.push('--' + boundary + '--','');
     var content = bodyString.join('\r\n');
     return {
-        content: content,
+        body: content,
         headers: {
             'Content-Type': 'multipart/form-data; boundary='+boundary,
             'Content-Length': content.length
