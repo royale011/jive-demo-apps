@@ -177,7 +177,7 @@ function getImageParam (image) {
     var content = bodyString.join('\r\n');
     return {
         v: "v3",
-        href: "/profileImages/temporary"
+        href: "/profileImages/temporary",
         body: content,
         headers: {
             'Content-Type': 'multipart/form-data; boundary='+boundary,
