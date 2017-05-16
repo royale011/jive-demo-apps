@@ -82,7 +82,7 @@ function onViewer(viewer) {
         } else {
             alert('Sorry, FileReader API not supported');
         }
-        osapi.jive.core.post({
+        osapi.jive.core.put({
             v: "v3",
             href: "/people/@viewer/avatar",
             body: {
@@ -90,12 +90,8 @@ function onViewer(viewer) {
             }
         }).execute(function (response) {
             console.log('response', response);
-            container.hide();
-            croppable = true;
         },function(error){
             console.log('error', error);
-            container.hide();
-            croppable = true;
         });
     });
     $('.ok-button').click(function () {
