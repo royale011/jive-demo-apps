@@ -88,9 +88,7 @@ function onViewer(viewer) {
             v: "v3",
             href: "/people/@viewer/avatar",
             body: formData,
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+            type: 'multipart/form-data'
         }).execute(function (response) {
             console.log('response', response);
         },function(error){
