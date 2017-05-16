@@ -82,13 +82,13 @@ function onViewer(viewer) {
         } else {
             alert('Sorry, FileReader API not supported');
         }
-        osapi.jive.core.post(getImageParam({
+        osapi.jive.core.post({
             v: "v3",
             href: "/people/@viewer/avatar",
             body: {
                 "file": picValue
             }
-        })).execute(function (response) {
+        }).execute(function (response) {
             console.log('response', response);
             container.hide();
             croppable = true;
