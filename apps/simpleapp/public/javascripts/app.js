@@ -82,11 +82,14 @@ function onViewer(viewer) {
         } else {
             alert('Sorry, FileReader API not supported');
         }
+        var formData = new FormData();
+        formData.append("file", picValue);
         osapi.jive.core.put({
             v: "v3",
             href: "/people/@viewer/avatar",
-            body: {
-                "file": picValue
+            body: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
         }).execute(function (response) {
             console.log('response', response);
